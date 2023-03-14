@@ -5,9 +5,7 @@ public class VoidPaymentAuthQueueable implements Queueable{
     LB2BCreditCardReversalWrapper authReversalWrapper;
     Integer retryCount;
 
-    public VoidPaymentAuthQueueable(
-        String accessToken, String correlationId, LB2BCreditCardReversalWrapper authReversalWrapper, Integer retryCount
-    ) {
+    public VoidPaymentAuthQueueable(String accessToken, String correlationId, LB2BCreditCardReversalWrapper authReversalWrapper, Integer retryCount) {
         1. Set all passed in variables to instance variables.
     }
     
