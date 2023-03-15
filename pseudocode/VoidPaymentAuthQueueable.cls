@@ -3,18 +3,16 @@ public class VoidPaymentAuthQueueable implements Queueable{
     String accessToken;
     String correlationId;
     LB2BCreditCardReversalWrapper authReversalWrapper;
-    Integer retryCount;
 
-    public VoidPaymentAuthQueueable(String accessToken, String correlationId, LB2BCreditCardReversalWrapper authReversalWrapper, Integer retryCount) {
+    public VoidPaymentAuthQueueable(String accessToken, String correlationId, LB2BCreditCardReversalWrapper authReversalWrapper) {
         1. Set all passed in variables to instance variables.
     }
     
     public execute(QueueableContext ctx){
-        1. Build request using LB2BPaymentHubCalloutUtil.buildAuthReversalRequest method.
-        2. Send the request.
-        3. If request was a success, nothing else occurs.
-        4. If request failed, log it, and check is retryCount is greater than maxRetryCounts, which will be stored in metadata.
-        5. If retryCount is less than maxRetryCounts, then schedule this class to be ran again, passing in all instance variables, 
-           with retryCount incremented by one.
+        1. Call System.attachFinalizer() method, passing in instance of VoidPaymentAuthFinalizer
+        2. Build request using LB2BPaymentHubCalloutUtil.buildAuthReversalRequest method.
+        3. Send the request.
+        4. If request was a success, nothing else occurs.
+        5. If request failed, throw an Exception indicating that the void failed. This will allow the VoidPaymentAuthFinalizer to handle the callout failing.
     }
 }
