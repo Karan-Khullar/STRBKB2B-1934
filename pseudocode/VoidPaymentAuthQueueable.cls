@@ -10,8 +10,7 @@ public class VoidPaymentAuthQueueable implements Queueable{
     
     public execute(QueueableContext ctx){
         1. Call System.attachFinalizer() method, passing in instance of VoidPaymentAuthFinalizer
-        2. Build request using LB2BPaymentHubCalloutUtil.buildAuthReversalRequest method.
-        3. Send the request.
+        2. Call the LB2BPaymentHubCallout.authReversalCallout() method, passing in the correct instance variables
         4. If request was a success, nothing else occurs.
         5. If request failed, throw an Exception indicating that the void failed. This will allow the VoidPaymentAuthFinalizer to handle the callout failing.
     }
